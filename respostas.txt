@@ -1,0 +1,129 @@
+PL02 · Tecnologias da Internet I · Gonçalo Fernandes · nº 2022148 · 2026-10-28
+================================================================================
+
+
+EXERCÍCIO 1 · Da sopa de divs à semântica
+--------------------------------------------------------------------------------
+
+1. 0 erros (a página original já era válida; o validador só dá avisos de boas
+   práticas se o ficheiro estiver incompleto, o que não é o caso).
+
+2. Tabela dos 7 div:
+
+| # | div (class) | Elemento semântico | Porquê                                                                 |
+|---|-------------|--------------------|------------------------------------------------------------------------|
+| 1 | topo        | header             | É o cabeçalho da página: contém o título (h1) e o menu de navegação.   |
+| 2 | menu        | nav                | É o bloco de ligações de navegação principal da página.                |
+| 3 | conteudo    | main               | É o conteúdo principal e único da página; só pode haver um main.       |
+| 4 | bloco       | section            | Cada bloco é um tema da página com o seu próprio h2 (eventos, contactos). |
+| 5 | noticia     | article            | Cada notícia faz sentido sozinha e podia ser publicada à parte.        |
+| 6 | lateral     | aside              | É conteúdo acessório (uma dica), relacionado mas não essencial.        |
+| 7 | rodape      | footer             | É o rodapé da página, com o copyright.                                 |
+
+3. a 5. Ficheiro pl02-divs-corrigido.html: substituições feitas, atributos class
+   removidos, id mantidos (#topo, #eventos, #contactos), &copy; no rodapé e
+   <time datetime="2026-10-30"> na data da Hackathon. Validado com 0 erros e 0 avisos.
+
+6. Serviu para dar significado à estrutura: os elementos semânticos dizem ao
+   browser, aos leitores de ecrã e aos motores de pesquisa o que é cada parte da
+   página, o que melhora a acessibilidade, o SEO e a manutenção do código, coisa
+   que as div não fazem.
+
+
+EXERCÍCIO 3 · Texto com significado
+--------------------------------------------------------------------------------
+
+Frase com strong:
+    "Nunca entrego uma ficha sem a validar primeiro: o validador apanha erros
+    que eu não vejo."
+    Usei strong em "Nunca entrego uma ficha sem a validar primeiro" porque é uma
+    informação importante, um aviso que quero que o leitor não ignore. O strong
+    marca importância, gravidade ou urgência, independentemente da entoação.
+
+Frase com em:
+    "Não estudo HTML só por obrigação: estudo-o porque gosto de perceber como a
+    Web funciona por dentro."
+    Usei em em "gosto" porque a ênfase está na forma como a frase se lê: ao
+    carregar nessa palavra muda-se o sentido (não é por obrigação, é por gosto).
+    O em marca ênfase na leitura, como se a palavra fosse dita com mais força.
+
+Resumo: strong = importância; em = ênfase.
+
+
+EXERCÍCIO 6 · A tabela partida
+--------------------------------------------------------------------------------
+
+Problemas da versão partida (linhas do excerto do enunciado):
+
+- Linha 13: <td>Rui</td> está directamente dentro de <table>, fora de qualquer
+  <tr>. Uma célula só pode existir dentro de uma linha; o browser cria uma linha
+  implícita só com essa célula (1 coluna em vez de 3).
+- Linhas 15-16: <td colspan="3">Por entregar</td> já ocupa as 3 colunas da
+  tabela e a seguir ainda há mais um <td>Entregue</td>; a linha fica com 4
+  colunas, mais larga do que as 3 colunas definidas na primeira linha.
+- Falta de thead/tbody e de scope: os th do cabeçalho não têm scope="col" e os
+  nomes dos estudantes estão em td em vez de th scope="row", por isso um leitor
+  de ecrã não sabe que célula é título de quê.
+
+Mensagens do validador (validator.w3.org/nu, ficheiro completo; o excerto do
+enunciado começa na linha 10 do ficheiro, por isso a linha 13 do enunciado é a
+linha 22 do ficheiro):
+
+| Tipo  | Linha | Mensagem                                                                                              | O que significa                                                                             |
+|-------|-------|-------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| Erro  | 22    | "td" start tag in table body.                                                                         | Apareceu um <td> (o do Rui) directamente no corpo da tabela, sem estar dentro de um <tr>.   |
+| Aviso | 22-23 | A table row was 1 columns wide, which is less than the column count established by the first row (3). | A linha implícita criada só com a célula "Rui" tem 1 coluna; a primeira linha definiu 3.    |
+| Aviso | 25-26 | A table row was 4 columns wide and exceeded the column count established by the first row (3).        | colspan="3" (3 colunas) + mais um <td> = 4 colunas; a linha excede as 3 colunas da tabela. |
+
+Correcção (pl02-tabela-corrigida.html): o Rui passou para dentro do seu <tr>
+como <th scope="row">; «Por entregar» ficou com colspan="2" (só PL01 e PL02);
+a célula "Entregue" a mais foi removida; acrescentei thead/tbody, scope="col"
+nos títulos e th scope="row" nos nomes. Resultado: 0 erros e 0 avisos.
+
+
+EXERCÍCIO 8 · Validar com outline e entregar
+--------------------------------------------------------------------------------
+
+Outline (copiado do validador, opção outline):
+
+h1 Gonçalo Fernandes
+    h2 Sobre mim
+        h3 Porque escolhi Engenharia Informática
+        h3 Hobbies
+        h3 Os meus três sites preferidos
+        h3 Glossário de TINT1
+        h3 O que já aprendi sobre HTML
+    h2 Plano semanal
+        h3 Avaliação de TINT1
+    h2 Multimédia
+    h2 Ligações
+    h2 Notícias
+        h3 Entrega da PL02
+        h3 Início de TINT1
+
+3. Não há saltos de nível: o índice segue h1 (Gonçalo Fernandes) → h2 (Sobre
+   mim, Plano semanal, Multimédia, Ligações, Notícias) → h3 (as listas e os
+   restantes subtemas dentro de cada secção). O índice faz sentido e reflecte
+   as quatro secções do menu mais a secção Notícias dos extras.
+
+4. O aspecto praticamente não mudou em relação à PL01, porque os elementos
+   semânticos não têm estilo próprio relevante: header, nav, main, section,
+   aside e footer mudam o significado e a estrutura do documento, não a
+   aparência. A apresentação é papel do CSS (a única regra que acrescentei foi a
+   das bordas das tabelas).
+
+
+EXTRAS (OPCIONAL)
+--------------------------------------------------------------------------------
+
+1. Secção Notícias (section#noticias) com dois article, cada um com header
+   (h3 + time datetime) e footer (autor).
+
+2. mark na palavra-chave de cada definição (dd) do glossário de TINT1:
+   "marcação" (HTML), "endereço" (URL) e "protocolo" (HTTP).
+
+3. Experimentei um iframe com https://www.google.com e fica em branco: o Google
+   envia os cabeçalhos X-Frame-Options: SAMEORIGIN e Content-Security-Policy:
+   frame-ancestors, que proíbem o browser de incorporar a página noutro site.
+   O OpenStreetMap não os envia no endereço de embed, por isso funciona (T02,
+   diapositivo 23). O iframe do Google foi removido da entrega.
