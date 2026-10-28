@@ -9,7 +9,6 @@ Entrega da prática laboratorial 02 de Tecnologias da Internet I (ISTEC Porto, L
 | Enunciado | `../../../02_Praticas/LEI-A1-S1-TINT1-PL02.pdf` |
 | Ficheiros de partida | `../../../02_Praticas/pl02-ficheiros/` |
 | Resumo e lista de verificação | [docs/praticas.md](../../../docs/praticas.md#pl02--uma-página-com-estrutura-listas-tabelas-e-multimédia) |
-| Repositório GitHub | https://github.com/ltarkker/PL02_2022148GoncaloFernandes |
 
 ## Ficheiros
 
@@ -34,7 +33,6 @@ Entrega da prática laboratorial 02 de Tecnologias da Internet I (ISTEC Porto, L
 Entrega praticamente completa: `index.html`, `pl02-divs-corrigido.html` e `pl02-tabela-corrigida.html` validam com 0 erros e 0 avisos no validator.w3.org, e o `respostas.txt` tem os exercícios 1, 3, 6 e 8 e os extras. Falta só:
 
 - `validador.png`: captura do validador (File Upload + opção **outline**) do `index.html`, a guardar na raiz do repositório e a incluir no zip.
-- Secção "Uso de IA" no `respostas.txt` (a escrever à mão).
 
 ## Git
 
